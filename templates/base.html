@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}Flask Feedback{% endblock %}
+    </title>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+    <!--Part 2: Make a Base Template-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand">Flask Feedback</a>
+        <ul class="navbar-nav">
+            {% if 'username' in session %}
+            <li class="nav-item active">
+                <a class="nav-link" href="/logout">Logout<span class="sr-only"></span></a>
+            </li>
+            {% else %}
+            <li class="nav-item active">
+                <a class="nav-link" href="/login">Login<span class="sr-only"></span></a>
+            </li>
+
+            <a class="nav-link" href="/">Register</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="container mt-5">
+        {% for msg in get_flashed_messages() %}
+        <div class="alert alert-info">{{ msg }}</div>
+        {% endfor %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+
+</html>

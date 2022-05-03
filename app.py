@@ -71,6 +71,7 @@ def login():
             flash(f'{username} is log in!')    
             return redirect(f"/users/{user.username}")
         else:
+            form.username.errors = ['Invalid username/password']
             return render_template('users/login.html', form=form)
 
     return render_template('users/login.html', form=form)
